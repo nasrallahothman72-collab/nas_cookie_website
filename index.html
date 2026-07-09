@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Bites - Premium Homemade Cookies</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #F5F1E8;
+            --chocolate: #6B4423;
+            --brown: #8B5E3C;
+            --gold: #D4AF37;
+            --dark-brown: #3E2723;
+            --light-beige: #F9F7F3;
+            --text-primary: #2C2C2C;
+            --text-secondary: #666666;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--cream);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ============ Navigation ============ */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(245, 241, 232, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.8rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--chocolate);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-btn {
+            background: var(--chocolate);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .cta-btn:hover {
+            background: var(--brown);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(107, 68, 35, 0.2);
+        }
+
+        /* ============ Language Selector ============ */
+        .language-selector {
+            position: relative;
+        }
+
+        .lang-btn {
+            background: white;
+            border: 2px solid var(--chocolate);
+            color: var(--chocolate);
+            padding: 0.6rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn:hover {
+            background: var(--chocolate);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 2px solid var(--chocolate);
+            border-radius: 10px;
+            min-width: 150px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1002;
+            margin-top: 0.5rem;
+        }
+
+        .lang-dropdown.active {
+            max-height: 300px;
+        }
+
+        .lang-option {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(107, 68, 35, 0.1);
+            color: var(--text-primary);
+            background: white;
+            width: 100%;
+            text-align: left;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .lang-option:last-child {
+            border-bottom: none;
+        }
+
+        .lang-option:hover {
+            background: var(--light-beige);
+            color: var(--chocolate);
+            padding-left: 1.8rem;
+        }
+
+        .lang-option.active {
+            background: var(--chocolate);
+            color: white;
+        }
+
+        .language-selector {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .language-btn {
+            background: transparent;
+            border: none;
+            color: var(--chocolate);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: 600;
+        }
+
+        .language-btn:hover {
+            color: var(--gold);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 2px solid var(--chocolate);
+            border-radius: 10px;
+            min-width: 150px;
+            display: none;
+            flex-direction: column;
+            z-index: 1100;
+            margin-top: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .language-dropdown.active {
+            display: flex;
+        }
+
+        .language-option {
+            padding: 0.8rem 1.2rem;
+            background: white;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(107, 68, 35, 0.1);
+        }
+
+        .language-option:last-child {
+            border-bottom: none;
+        }
+
+        .language-option:hover {
+            background: var(--light-beige);
+            padding-left: 1.5rem;
+        }
+
+        .language-option.active {
+            background: var(--chocolate);
+            color: white;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--chocolate);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* ============ Hero Section ============ */
+        .hero {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+            background: linear-gradient(135deg, var(--cream) 0%, var(--light-beige) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--chocolate);
+            letter-spacing: -1px;
+        }
+
+        .hero-text h1 span {
+            color: var(--gold);
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--chocolate);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--chocolate);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--brown);
+            border-color: var(--brown);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(107, 68, 35, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--chocolate);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--chocolate);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--chocolate);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(107, 68, 35, 0.2);
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-circle {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--brown), var(--gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 150px;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 20px 60px rgba(107, 68, 35, 0.15);
+            overflow: hidden;
+        }
+
+        .hero-image-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* ============ About Section ============ */
+        .about {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--chocolate);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--chocolate);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(107, 68, 35, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature h4 {
+            color: var(--chocolate);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* ============ Products Section ============ */
+        .products {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: var(--light-beige);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(107, 68, 35, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--brown), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--chocolate);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .product-btn {
+            background: var(--chocolate);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .product-btn:hover {
+            background: var(--brown);
+            transform: scale(1.05);
+        }
+
+        /* ============ Testimonials Section ============ */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--light-beige) 100%);
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(107, 68, 35, 0.1);
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-text {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--chocolate);
+            font-size: 0.95rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* ============ Contact Section ============ */
+        .contact {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .contact-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            color: var(--chocolate);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            margin-bottom: 2rem;
+        }
+
+        .contact-item h4 {
+            color: var(--chocolate);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item p {
+            color: var(--text-secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--chocolate);
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-btn:hover {
+            background: var(--brown);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: var(--chocolate);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.9rem 1rem;
+            border: 2px solid var(--light-beige);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: var(--light-beige);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--chocolate);
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-btn {
+            background: var(--chocolate);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .form-btn:hover {
+            background: var(--brown);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(107, 68, 35, 0.2);
+        }
+
+        /* ============ Footer ============ */
+        footer {
+            background: var(--dark-brown);
+            color: var(--cream);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding-top: 2rem;
+            font-size: 0.9rem;
+            color: rgba(245, 241, 232, 0.7);
+        }
+
+        /* ============ Animations ============ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* ============ Responsive Design ============ */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--cream);
+                flex-direction: column;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease;
+                padding: 0;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                max-height: 600px;
+                padding: 1rem 0;
+                overflow-y: auto;
+            }
+
+            .nav-links li {
+                border-bottom: 1px solid rgba(107, 68, 35, 0.1);
+            }
+
+            .nav-links a {
+                padding: 1rem 2rem;
+                display: block;
+                width: 100%;
+                white-space: normal;
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .nav-links a:hover {
+                background: var(--light-beige);
+                color: var(--chocolate);
+            }
+            
+            .nav-links .cta-btn {
+                margin: 1rem 2rem;
+                width: calc(100% - 4rem);
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-image-circle {
+                width: 300px;
+                height: 300px;
+                font-size: 100px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                margin-top: 60px;
+                padding: 1rem;
+            }
+
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .about, .products, .testimonials, .contact {
+                padding: 3rem 1rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#home" class="logo">Sweet<span>Bites</span></a>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" class="nav-text">Home</a></li>
+            <li><a href="#about" class="nav-text">About</a></li>
+            <li><a href="#products" class="nav-text">Products</a></li>
+            <li><a href="#testimonials" class="nav-text">Reviews</a></li>
+            <li><a href="#contact" class="nav-text">Contact</a></li>
+            <li>
+                <div class="language-selector">
+                    <button class="language-btn" id="languageBtn">
+                        🌐 <span id="langCode">EN</span>
+                    </button>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <button class="language-option active" data-lang="en">English</button>
+                        <button class="language-option" data-lang="ms">Malay (বাংলা)</button>
+                        <button class="language-option" data-lang="ta">Tamil (தமிழ்)</button>
+                        <button class="language-option" data-lang="zh">中文 (Chinese)</button>
+                    </div>
+                </div>
+            </li>
+            <li><button class="cta-btn" id="orderBtn">Order Now</button></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Freshly Baked <span>Happiness</span> in Every Bite</h1>
+                <p>Indulge in our premium homemade cookies, crafted with love and the finest ingredients. Each cookie is a masterpiece of taste and texture.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary">Shop Now</button>
+                    <button class="btn-secondary">Learn More</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/hero-image-cookies.jpg" alt="Premium Cookie" class="hero-image-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2 class="section-title">About Our Craft</h2>
+        <p class="section-subtitle">Baked with passion, made with love</p>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>What Makes Us Special</h3>
+                <p>At SweetBites, we believe that every cookie tells a story. Our journey began in a small kitchen with a simple mission: to create premium, homemade cookies that bring joy to every customer.</p>
+                <p>We use only the finest, organic ingredients sourced from trusted local suppliers. No artificial flavors, no preservatives – just pure, delicious cookies made the traditional way.</p>
+                <p>Each batch is carefully crafted and baked to perfection, ensuring consistent quality and that warm, freshly-baked taste you deserve.</p>
+                <div class="about-features">
+                    <div class="feature">
+                        <div class="feature-icon">🌿</div>
+                        <h4>100% Organic</h4>
+                        <p>Locally sourced ingredients</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👨‍🍳</div>
+                        <h4>Handcrafted</h4>
+                        <p>Made with care and passion</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h4>Fresh Daily</h4>
+                        <p>Baked fresh every morning</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎁</div>
+                        <h4>Gift Ready</h4>
+                        <p>Beautiful packaging available</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image" style="display: flex; justify-content: center; align-items: center;">
+                <img src="images/aboutbanner.jfif" alt="About SweetBites" style="width: 400px; height: 400px; border-radius: 15px; object-fit: cover; box-shadow: 0 20px 50px rgba(107, 68, 35, 0.2);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="products-container">
+            <h2 class="section-title">Our Collections</h2>
+            <p class="section-subtitle">Handpicked flavors for every mood</p>
+            <div class="products-grid">
+                <div class="product-card fade-in">
+                    <div class="product-image"><img src="images/double_choc.jfif" alt="Double Chocolate Cookie" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Double Chocolate</h3>
+                        <p class="product-desc">Rich dark chocolate chunks with a fudgy center. Perfect for chocolate lovers.</p>
+                        <div class="product-footer">
+                            <span class="product-price">RM 39.90</span>
+                            <button class="product-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-image"><img src="images/walnutdelight.jfif" alt="Walnut Delight Cookie" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Walnut Delight</h3>
+                        <p class="product-desc">Crunchy walnuts combined with buttery vanilla. A classic favorite redefined.</p>
+                        <div class="product-footer">
+                            <span class="product-price">RM 35.90</span>
+                            <button class="product-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-image"><img src="images/bb.jfif" alt="Berry Bliss Cookie" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Berry Bliss</h3>
+                        <p class="product-desc">Fresh strawberry and blueberry flavors. A delightful burst of natural sweetness.</p>
+                        <div class="product-footer">
+                            <span class="product-price">RM 44.90</span>
+                            <button class="product-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-image"><img src="images/peanutbutter.jfif" alt="Peanut Butter Heaven Cookie" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Peanut Butter Heaven</h3>
+                        <p class="product-desc">Creamy peanut butter with chocolate swirls. A match made in heaven.</p>
+                        <div class="product-footer">
+                            <span class="product-price">RM 38.50</span>
+                            <button class="product-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-image"><img src="images/gtmatcha.jfif" alt="Green Tea Matcha Cookie" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Green Tea Matcha</h3>
+                        <p class="product-desc">Aromatic matcha green tea with white chocolate. Premium and elegant.</p>
+                        <div class="product-footer">
+                            <span class="product-price">RM 49.90</span>
+                            <button class="product-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-image"><img src="images/oz.jfif" alt="Orange Zest Cookie" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Orange Zest</h3>
+                        <p class="product-desc">Bright citrus orange with dark chocolate. Refreshingly sweet and zesty.</p>
+                        <div class="product-footer">
+                            <span class="product-price">RM 39.90</span>
+                            <button class="product-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="testimonials-container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <p class="section-subtitle">Real reviews from real cookie lovers</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"These cookies are absolutely divine! They taste like they were made in heaven. I've ordered three times already and each batch is consistently amazing."</p>
+                    <p class="testimonial-author">Sarah Johnson</p>
+                    <p class="testimonial-role">Cookie Enthusiast</p>
+                </div>
+
+                <div class="testimonial-card fade-in">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"I'm so impressed with the quality and freshness. My whole family has become obsessed! The packaging was beautiful too – perfect for gifting."</p>
+                    <p class="testimonial-author">Michael Chen</p>
+                    <p class="testimonial-role">Regular Customer</p>
+                </div>
+
+                <div class="testimonial-card fade-in">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"As a professional baker myself, I can appreciate the craftsmanship here. These cookies rival anything you'd find in a high-end bakery. Absolutely brilliant!"</p>
+                    <p class="testimonial-author">Emma Rodriguez</p>
+                    <p class="testimonial-role">Professional Baker</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">We'd love to hear from you</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <h4>📍 Location</h4>
+                        <p>22000 Jerteh Street<br>Besut, Terengganu</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>📞 Phone</h4>
+                        <p>+0123456789 <br>Mon-Fri 9AM-6PM</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>📧 Email</h4>
+                        <p>nasrallahothman72@gmail.com<br>abenas246@gmail.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>💬 Follow Us</h4>
+                        <div class="social-links">
+                            <button class="social-btn" title="Instagram">
+                                <img src="images/ig.jfif" alt="Instagram" style="width: 24px; height: 24px;">
+                            </button>
+                            <button class="social-btn" title="Facebook">
+                                <img src="images/fb.jfif" alt="Facebook" style="width: 24px; height: 24px;">
+                            </button>
+                            <button class="social-btn" title="WhatsApp">
+                                <img src="images/wsicon.jpg" alt="WhatsApp" style="width: 24px; height: 24px;">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Tell us about your inquiry..." required></textarea>
+                    </div>
+                    <button type="submit" class="form-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#products">Products</a>
+                <a href="#contact">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SweetBites. All rights reserved. Baked with ❤️ and love.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============ Language Translation System ============
+        const translations = {
+            en: {
+                // Navigation
+                nav: { home: 'Home', about: 'About', products: 'Products', reviews: 'Reviews', contact: 'Contact', order: 'Order Now' },
+                
+                // Hero Section
+                hero: {
+                    heading: 'Freshly Baked Happiness in Every Bite',
+                    paragraph: 'Indulge in our premium homemade cookies, crafted with love and the finest ingredients. Each cookie is a masterpiece of taste and texture.',
+                    btnShop: 'Shop Now',
+                    btnLearn: 'Learn More'
+                },
+                
+                // About Section
+                about: {
+                    title: 'About Our Craft',
+                    subtitle: 'Baked with passion, made with love',
+                    heading: 'What Makes Us Special',
+                    text1: 'At SweetBites, we believe that every cookie tells a story. Our journey began in a small kitchen with a simple mission: to create premium, homemade cookies that bring joy to every customer.',
+                    text2: 'We use only the finest, organic ingredients sourced from trusted local suppliers. No artificial flavors, no preservatives – just pure, delicious cookies made the traditional way.',
+                    text3: 'Each batch is carefully crafted and baked to perfection, ensuring consistent quality and that warm, freshly-baked taste you deserve.',
+                    feature1: { icon: '🌿', title: '100% Organic', desc: 'Locally sourced ingredients' },
+                    feature2: { icon: '👨‍🍳', title: 'Handcrafted', desc: 'Made with care and passion' },
+                    feature3: { icon: '⚡', title: 'Fresh Daily', desc: 'Baked fresh every morning' },
+                    feature4: { icon: '🎁', title: 'Gift Ready', desc: 'Beautiful packaging available' }
+                },
+                
+                // Products Section
+                products: {
+                    title: 'Our Collections',
+                    subtitle: 'Handpicked flavors for every mood',
+                    items: [
+                        { name: 'Double Chocolate', desc: 'Rich dark chocolate chunks with a fudgy center. Perfect for chocolate lovers.', price: 'RM 39.90' },
+                        { name: 'Walnut Delight', desc: 'Crunchy walnuts combined with buttery vanilla. A classic favorite redefined.', price: 'RM 35.90' },
+                        { name: 'Berry Bliss', desc: 'Fresh strawberry and blueberry flavors. A delightful burst of natural sweetness.', price: 'RM 44.90' },
+                        { name: 'Peanut Butter Heaven', desc: 'Creamy peanut butter with chocolate swirls. A match made in heaven.', price: 'RM 38.50' },
+                        { name: 'Green Tea Matcha', desc: 'Aromatic matcha green tea with white chocolate. Premium and elegant.', price: 'RM 49.90' },
+                        { name: 'Orange Zest', desc: 'Bright citrus orange with dark chocolate. Refreshingly sweet and zesty.', price: 'RM 39.90' }
+                    ],
+                    btnCart: 'Add to Cart'
+                },
+                
+                // Testimonials Section
+                testimonials: {
+                    title: 'What Our Customers Say',
+                    subtitle: 'Real reviews from real cookie lovers',
+                    items: [
+                        { text: 'These cookies are absolutely divine! They taste like they were made in heaven. I\'ve ordered three times already and each batch is consistently amazing.', author: 'Sarah Johnson', role: 'Cookie Enthusiast' },
+                        { text: 'I\'m so impressed with the quality and freshness. My whole family has become obsessed! The packaging was beautiful too – perfect for gifting.', author: 'Michael Chen', role: 'Regular Customer' },
+                        { text: 'As a professional baker myself, I can appreciate the craftsmanship here. These cookies rival anything you\'d find in a high-end bakery. Absolutely brilliant!', author: 'Emma Rodriguez', role: 'Professional Baker' }
+                    ]
+                },
+                
+                // Contact Section
+                contact: {
+                    title: 'Get In Touch',
+                    subtitle: 'We\'d love to hear from you',
+                    location: { heading: '📍 Location', text: '22000 Jerteh Street\nBesut, Terengganu' },
+                    phone: { heading: '📞 Phone', text: '+0123456789\nMon-Fri 9AM-6PM' },
+                    email: { heading: '📧 Email', text: 'nasrallahothman72@gmail.com\nabenas246@gmail.com' },
+                    social: { heading: '💬 Follow Us' },
+                    form: { name: 'Your Name', email: 'Email Address', message: 'Message', placeholder_name: 'Enter your name', placeholder_email: 'Enter your email', placeholder_msg: 'Tell us about your inquiry...', submit: 'Send Message' }
+                },
+                
+                // Footer
+                footer: { privacy: 'Privacy Policy', terms: 'Terms & Conditions', copyright: '© 2024 SweetBites. All rights reserved. Baked with ❤️ and love.' }
+            },
+            
+            ms: {
+                // Navigation
+                nav: { home: 'Beranda', about: 'Tentang', products: 'Produk', reviews: 'Ulasan', contact: 'Hubungi', order: 'Pesan Sekarang' },
+                
+                // Hero Section
+                hero: {
+                    heading: 'Kebahagiaan Segar Dipanggang di Setiap Gigitan',
+                    paragraph: 'Nikmati kuki premium buatan tangan kami, dibuat dengan cinta dan bahan-bahan terbaik. Setiap kuki adalah karya seni rasa dan tekstur.',
+                    btnShop: 'Belanja Sekarang',
+                    btnLearn: 'Pelajari Lebih Lanjut'
+                },
+                
+                // About Section
+                about: {
+                    title: 'Tentang Keahlian Kami',
+                    subtitle: 'Dipanggang dengan semangat, dibuat dengan cinta',
+                    heading: 'Apa yang Membuat Kami Istimewa',
+                    text1: 'Di SweetBites, kami percaya bahwa setiap kuki menceritakan kisah. Perjalanan kami dimulai di dapur kecil dengan misi sederhana: membuat kuki premium buatan tangan yang membawa kegembiraan kepada setiap pelanggan.',
+                    text2: 'Kami hanya menggunakan bahan-bahan organik terbaik yang bersumber dari pemasok lokal terpercaya. Tidak ada rasa buatan, tidak ada pengawet – hanya kuki murni dan lezat yang dibuat dengan cara tradisional.',
+                    text3: 'Setiap batch dibuat dengan hati-hati dan dipanggang dengan sempurna, memastikan kualitas konsisten dan rasa segar yang Anda layak dapatkan.',
+                    feature1: { icon: '🌿', title: '100% Organik', desc: 'Bahan bersumber lokal' },
+                    feature2: { icon: '👨‍🍳', title: 'Buatan Tangan', desc: 'Dibuat dengan hati-hati' },
+                    feature3: { icon: '⚡', title: 'Segar Setiap Hari', desc: 'Dipanggang segar setiap pagi' },
+                    feature4: { icon: '🎁', title: 'Siap Hadiah', desc: 'Kemasan indah tersedia' }
+                },
+                
+                // Products Section
+                products: {
+                    title: 'Koleksi Kami',
+                    subtitle: 'Rasa pilihan untuk setiap suasana hati',
+                    items: [
+                        { name: 'Cokelat Ganda', desc: 'Potongan cokelat gelap kaya dengan pusat yang lembab. Sempurna untuk pecinta cokelat.', price: 'RM 39.90' },
+                        { name: 'Kesenangan Kacang', desc: 'Kacang renyah dikombinasikan dengan vanila bermentega. Favorit klasik yang didefinisikan ulang.', price: 'RM 35.90' },
+                        { name: 'Kebahagiaan Berry', desc: 'Rasa stroberi dan blueberry segar. Ledakan manisnya yang menyenangkan.', price: 'RM 44.90' },
+                        { name: 'Surga Selai Kacang', desc: 'Selai kacang creamy dengan pusaran cokelat. Pasangan yang sempurna.', price: 'RM 38.50' },
+                        { name: 'Teh Hijau Matcha', desc: 'Teh hijau matcha aromatik dengan cokelat putih. Premium dan elegan.', price: 'RM 49.90' },
+                        { name: 'Citrus Jeruk', desc: 'Jeruk cerah dengan cokelat gelap. Manis dan segar yang menyegarkan.', price: 'RM 39.90' }
+                    ],
+                    btnCart: 'Tambah ke Keranjang'
+                },
+                
+                // Testimonials Section
+                testimonials: {
+                    title: 'Apa Kata Pelanggan Kami',
+                    subtitle: 'Ulasan nyata dari pecinta kuki nyata',
+                    items: [
+                        { text: 'Kuki ini benar-benar ilahi! Rasanya seperti dibuat di surga. Saya sudah memesan tiga kali dan setiap batch konsisten luar biasa.', author: 'Sarah Johnson', role: 'Pecinta Kuki' },
+                        { text: 'Saya sangat terkesan dengan kualitas dan kesegaran. Seluruh keluarga saya menjadi terobsesi! Kemasannya juga indah – sempurna untuk hadiah.', author: 'Michael Chen', role: 'Pelanggan Setia' },
+                        { text: 'Sebagai baker profesional sendiri, saya menghargai keahlian di sini. Kuki ini menyaingi apa pun yang Anda temukan di toko kue kelas atas. Sangat cemerlang!', author: 'Emma Rodriguez', role: 'Baker Profesional' }
+                    ]
+                },
+                
+                // Contact Section
+                contact: {
+                    title: 'Hubungi Kami',
+                    subtitle: 'Kami ingin mendengar dari Anda',
+                    location: { heading: '📍 Lokasi', text: '22000 Jerteh Street \nBesut, Terengganu' },
+                    phone: { heading: '📞 Telepon', text: '+0123456789\nIsnin-Jum 9AM-6PM' },
+                    email: { heading: '📧 Email', text: 'nasrallahothman72@gmail.com\nabenas246@gmail.com' },
+                    social: { heading: '💬 Ikuti Kami' },
+                    form: { name: 'Nama Anda', email: 'Alamat Email', message: 'Pesan', placeholder_name: 'Masukkan nama Anda', placeholder_email: 'Masukkan email Anda', placeholder_msg: 'Mesej Kami...', submit: 'Kirim Pesan' }
+                },
+                
+                // Footer
+                footer: { privacy: 'Privasi', terms: 'Syarat & Terma', copyright: '© 2024 SweetBites. Semua hak dilindungi. Dipanggang dengan ❤️ dan keikhlasan.' }
+            },
+            
+            ta: {
+                // Navigation
+                nav: { home: 'முகப்பு', about: 'பற்றி', products: 'பொருட்கள்', reviews: 'மதிப்புரைகள்', contact: 'தொடர்பு', order: 'இப்போது ஆர்டர் செய்யுங்கள்' },
+                
+                // Hero Section
+                hero: {
+                    heading: 'ஒவ்வொரு கடிப்பிலும் புதிதாக சுடப்பட்ட சুகம்',
+                    paragraph: 'எங்கள் பிரீமியம் கைஇயக்க கோதுமை சுவை, பெரிய கொட்டைகள் மற்றும் சிறந்த பொருட்கள் கொண்டு வருவிக்க பரிந்துரைக்கப்படுகிறது. ஒவ்வொரு கோதுமை சுவை மற்றும் கட்டமைப்பின் மாஸ்டர்பீசாகும்.',
+                    btnShop: 'இப்போது கடை',
+                    btnLearn: 'மேலும் அறிந்து கொள்ளுங்கள்'
+                },
+                
+                // About Section
+                about: {
+                    title: 'எங்கள் கலை பற்றி',
+                    subtitle: 'ஆவேசம் கொண்டு சுடப்பட்டது, அன்புடன் செய்யப்பட்டது',
+                    heading: 'எது நம்மை சிறப்பாக்குகிறது',
+                    text1: 'SweetBites இல், நாங்கள் நம்புகிறோம் ஒவ்வொரு கோதுமையும் ஒரு கதையை சொல்கிறது. எங்கள் பயணம் ஒரு சிறிய சமையல்கட்டத்தில் தொடங்கியது, ஒரு எளிய நோக்கம் கொண்டு: பிரீமியம், கைஇயக்க கோதுமையை உருவாக்க.',
+                    text2: 'நாம் மிகவும் சிறந்த, கரிம பொருட்களையும் நம்புக்கூடிய உள்ளூர் விநியোகஸ்தர்களிடமிருந்து பெறுகிறோம். செயற்கை சுவை இல்லை, பாதுகாப்பு இல்லை - கற்றான வழியில் செய்யப்பட்ட தூய, சুস்வையான பொருட்கள் மட்டுமே.',
+                    text3: 'ஒவ்வொரு தொகுப்பும் கவனமாக செய்யப்பட்டு, சிறப்பாக சுடப்பட்டு, நிலையான தரம் மற்றும் உங்கள் தகுதியான புதிய சுடப்பட்ட சுவை உறுதிப்படுத்தப்பட்டது.',
+                    feature1: { icon: '🌿', title: '100% கரிமப்பொருள்', desc: 'உள்ளூர் பெறப்பட்ட பொருட்கள்' },
+                    feature2: { icon: '👨‍🍳', title: 'கைவேலை', desc: 'கவனம் மற்றும் ஆவேசம் கொண்டு செய்யப்பட்டது' },
+                    feature3: { icon: '⚡', title: 'தினமும் புதிது', desc: 'ஒவ்வொரு காலையும் புதிதாக சுடப்பட்டது' },
+                    feature4: { icon: '🎁', title: 'பரிசு தயாரிப்பு', desc: 'அழகான பாக்கேஜிங் கிடைக்கிறது' }
+                },
+                
+                // Products Section
+                products: {
+                    title: 'எங்கள் சேகரணை',
+                    subtitle: 'ஒவ்வொரு மனநிலைக்கும் கையெடுக்கப்பட்ட சுவைகள்',
+                    items: [
+                        { name: 'இரட்டை சாக்லேட்', desc: 'பணக்கார கருப்பு சாக்லேட் துண்டு ஒரு ஈமுகட்டியான மையுடன். சாக்லேட் அன்பர்களுக்கு சிறப்பு.', price: 'RM 39.90' },
+                        { name: 'வால்நட் ஆনந்தம்', desc: 'வெண்ணெய் வனிலா உடன் கடினமான வால்நட். ஒரு பாரம்பரிய பிரিய மறுவரையறை.', price: 'RM 35.90' },
+                        { name: 'பெரி சுখம்', desc: 'புதிய ஸ்ட்ராபெரி மற்றும் பிளுபெரி சுவைகள். ஒரு மகிழ்ச்சிகரமான இயற்கை இனிப்பு வெடிப்பு.', price: 'RM 44.90' },
+                        { name: 'வேர்க்கடலை வெண்ணெய் சொர்கம்', desc: 'கிரீமி வேர்க்கடலை வெண்ணெய் சாக்லேட் சுழல்களுடன். சொர்கத்தில் ஒரு பொருத்தம்.', price: 'RM 38.50' },
+                        { name: 'பச்சை தேநீர் மச்சா', desc: 'வெள்ளை சாக்லேட் உடன் நறுமணம் கொண்ட மச்சா பச்சை தேநீர். பிரீமியம் மற்றும் கண்ணழகான.', price: 'RM 49.90' },
+                        { name: 'ஆரஞ்சு ஜெஸ்ட்', desc: 'கருப்பு சாக்லேட் உடன் பிரகாசமான சிட்ரஸ் ஆரஞ்சு. புதிய மற்றும் சுவாரஸ்யமான.', price: 'RM 39.90' }
+                    ],
+                    btnCart: 'கார்டிற்கு சேர்க்கவும்'
+                },
+                
+                // Testimonials Section
+                testimonials: {
+                    title: 'எங்கள் வாடிக்கையாளர்கள் என்ன சொல்கிறார்கள்',
+                    subtitle: 'உண்மையான கோதுமை அன்பர்களிடமிருந்து உண்மையான மதிப்புரைகள்',
+                    items: [
+                        { text: 'இந்த கோதுமைகள் முற்றிலும் தெய்வீகம்! அவை சொர்கத்தில் செய்யப்பட்ட மாதிரி சுவைக்கும். நான் ஏற்கனவே மூன்று முறை ஆர்டர் செய்েறேன் மற்றும் ஒவ்வொரு தொகுப்பும் நிலையாக அசாதாரணமாக உள்ளது.', author: 'Sarah Johnson', role: 'கோதுமை ஆசைக்காரி' },
+                        { text: 'தரம் மற்றும் புதுமையில் நான் மிகவும் கவலைக்குரியேன். எனது முழு குடும்பமும் வசப்படுத்தப்பட்டுள்ளது! பாக்கேஜிங் அனந்தமாக இருந்தது - பரிசுக்கு சிறந்த.', author: 'Michael Chen', role: 'வழக்கமான வாடிக்கையாளர்' },
+                        { text: 'ஒரு தொழில்முறை பேக்கர் என்ற விதத்தில், நான் இங்கு கைவேலை பாராட்டுகிறேன். இந்த கோதுமைகள் எந்த உচ்ச-இறுதி বেকারியில் கண்டவற்றை போட்டி கொள்கிறது. முற்றிலும் நிமிர்ந்தான!', author: 'Emma Rodriguez', role: 'தொழில்முறை பேக்கர்' }
+                    ]
+                },
+                
+                // Contact Section
+                contact: {
+                    title: 'தொடர்பு கொள்ளவும்',
+                    subtitle: 'நாங்கள் உங்களிடமிருந்து கேட்க விரும்புகிறோம்',
+                    location: { heading: '📍 இடம்', text: '22000 Jerteh Street\nBesut, Terengganu' },
+                    phone: { heading: '📞 ფოન్', text: '+0123456789\nSom-Vel 9AM-6PM' },
+                    email: { heading: '📧 ஈமெயிल்', text: 'nasrallahothman72@gmail.com\nabenas246@gmail.com' },
+                    social: { heading: '💬 எங்களைப் பின்தொடரவும்' },
+                    form: { name: 'உங்கள் பெயர்', email: 'ஈமெயிল் முகவரி', message: 'செய்தி', placeholder_name: 'உங்கள் பெயர் உள்ளிடவும்', placeholder_email: 'உங்கள் ஈமெயில் உள்ளிடவும்', placeholder_msg: 'உங்கள் விசாரணை பற்றி எங்களுக்கு சொல்லுங்கள்...', submit: 'செய்தி அனுப்பவும்' }
+                },
+                
+                // Footer
+                footer: { privacy: 'தனியுரிமை கொள்கை', terms: 'விதிமுறைகள் மற்றும் நிபந்தனைகள்', copyright: '© 2024 SweetBites. அனைத்து உரிமைகளும் வசப்படுத்தப்பட்டுள்ளன. ❤️ மற்றும் அன்புடன் சுடப்பட்டது.' }
+            },
+            
+            zh: {
+                // Navigation
+                nav: { home: '主页', about: '关于', products: '产品', reviews: '评论', contact: '联系', order: '现在订购' },
+                
+                // Hero Section
+                hero: {
+                    heading: '每一口都是新鲜烘焙的幸福',
+                    paragraph: '享受我们的优质手工饼干，采用最好的爱心和最优质的原料制作。每块饼干都是味道和质地的杰作。',
+                    btnShop: '现在购物',
+                    btnLearn: '了解更多'
+                },
+                
+                // About Section
+                about: {
+                    title: '关于我们的工艺',
+                    subtitle: '用热情烘焙，用爱制作',
+                    heading: '是什么让我们与众不同',
+                    text1: '在 SweetBites，我们相信每块饼干都讲述一个故事。我们的旅程始于一个小厨房，目标简单：创造优质手工饼干，为每位顾客带来快乐。',
+                    text2: '我们只使用最优质的有机原料，从可信赖的本地供应商采购。没有人工香料，没有防腐剂 - 只有用传统方式制作的纯净美味饼干。',
+                    text3: '每一批都是精心制作和完美烘焙的，确保一致的质量和新烤的温暖味道，您值得拥有。',
+                    feature1: { icon: '🌿', title: '100% 有机', desc: '本地采购的原料' },
+                    feature2: { icon: '👨‍🍳', title: '手工制作', desc: '用心和热情制作' },
+                    feature3: { icon: '⚡', title: '每天新鲜', desc: '每天早上新鲜烘焙' },
+                    feature4: { icon: '🎁', title: '礼品包装', desc: '提供精美包装' }
+                },
+                
+                // Products Section
+                products: {
+                    title: '我们的系列',
+                    subtitle: '为每种心情精心挑选的口味',
+                    items: [
+                        { name: '双倍巧克力', desc: '富含黑巧克力块和软糖中心。完美适合巧克力爱好者。', price: 'RM 39.90' },
+                        { name: '核桃喜悦', desc: '脆核桃与黄油香草相结合。经典最爱的重新定义。', price: 'RM 35.90' },
+                        { name: '浆果至福', desc: '新鲜草莓和蓝莓风味。令人愉悦的天然甜味爆发。', price: 'RM 44.90' },
+                        { name: '花生酱天堂', desc: '奶油花生酱与巧克力漩涡。天堂的完美搭配。', price: 'RM 38.50' },
+                        { name: '绿茶抹茶', desc: '芳香抹茶绿茶与白巧克力。优雅而高级。', price: 'RM 49.90' },
+                        { name: '橙皮风味', desc: '鲜艳的柑橘橙与黑巧克力。令人耳目一新且美味。', price: 'RM 39.90' }
+                    ],
+                    btnCart: '加入购物车'
+                },
+                
+                // Testimonials Section
+                testimonials: {
+                    title: '我们的顾客怎么说',
+                    subtitle: '来自真实饼干爱好者的真实评论',
+                    items: [
+                        { text: '这些饼干绝对是天堂般的！它们尝起来就像在天堂里烤的一样。我已经订购了三次，每一批都出奇地一致。', author: 'Sarah Johnson', role: '饼干爱好者' },
+                        { text: '我对质量和新鲜度印象深刻。我的整个家族都痴迷了！包装也很漂亮 - 非常适合送礼。', author: 'Michael Chen', role: '常客' },
+                        { text: '作为一名专业烘焙师，我可以欣赏这里的工艺。这些饼干与您在高端面包店找到的任何东西都相匹敌。绝对出色！', author: 'Emma Rodriguez', role: '专业烘焙师' }
+                    ]
+                },
+                
+                // Contact Section
+                contact: {
+                    title: '联系我们',
+                    subtitle: '我们很乐意听到您的信息',
+                    location: { heading: '📍 位置', text: '22000 Jerteh Street\nBesut, Terengganu' },
+                    phone: { heading: '📞 电话', text: '+0123456789\n周一-周五 9AM-6PM' },
+                    email: { heading: '📧 电子邮件', text: 'nasrallahothman72@gmail.com\nabenas246@gmail.com' },
+                    social: { heading: '💬 关注我们' },
+                    form: { name: '您的姓名', email: '电子邮件地址', message: '留言', placeholder_name: '输入您的姓名', placeholder_email: '输入您的电子邮件', placeholder_msg: '告诉我们您的咨询...', submit: '发送消息' }
+                },
+                
+                // Footer
+                footer: { privacy: '隐私政策', terms: '条款和条件', copyright: '© 2024 SweetBites。保留所有权利。用❤️和爱烘焙。' }
+            }
+        };
+
+        let currentLanguage = localStorage.getItem('selectedLanguage') || 'en';
+
+        // ============ Language Switcher ============
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const langCode = document.getElementById('langCode');
+
+        languageBtn.addEventListener('click', () => {
+            languageDropdown.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                const lang = e.target.getAttribute('data-lang');
+                currentLanguage = lang;
+                localStorage.setItem('selectedLanguage', lang);
+                
+                // Update active state
+                document.querySelectorAll('.language-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                e.target.classList.add('active');
+                
+                // Update language code display
+                langCode.textContent = lang.toUpperCase();
+                
+                // Close dropdown
+                languageDropdown.classList.remove('active');
+                
+                // Update all content
+                updatePageLanguage();
+            });
+        });
+
+        // Set initial active language
+        document.querySelectorAll('.language-option').forEach(option => {
+            if (option.getAttribute('data-lang') === currentLanguage) {
+                option.classList.add('active');
+                langCode.textContent = currentLanguage.toUpperCase();
+            }
+        });
+
+        // ============ Update Page Content ============
+        function updatePageLanguage() {
+            const t = translations[currentLanguage];
+
+            // Navigation
+            document.querySelectorAll('.nav-text').forEach((el, index) => {
+                const navItems = ['home', 'about', 'products', 'reviews', 'contact'];
+                if (navItems[index]) el.textContent = t.nav[navItems[index]];
+            });
+            document.getElementById('orderBtn').textContent = t.nav.order;
+
+            // Hero Section
+            document.querySelector('.hero-text h1').innerHTML = t.hero.heading.replace('Happiness', '<span>Happiness</span>');
+            document.querySelector('.hero-text p').textContent = t.hero.paragraph;
+            const heroBtns = document.querySelectorAll('.hero-buttons button');
+            if (heroBtns[0]) heroBtns[0].textContent = t.hero.btnShop;
+            if (heroBtns[1]) heroBtns[1].textContent = t.hero.btnLearn;
+
+            // About Section
+            const aboutTitle = document.querySelector('#about .section-title');
+            const aboutSubtitle = document.querySelector('#about .section-subtitle');
+            if (aboutTitle) aboutTitle.textContent = t.about.title;
+            if (aboutSubtitle) aboutSubtitle.textContent = t.about.subtitle;
+            
+            const aboutHeading = document.querySelector('.about-text h3');
+            const aboutTexts = document.querySelectorAll('.about-text p');
+            if (aboutHeading) aboutHeading.textContent = t.about.heading;
+            if (aboutTexts[0]) aboutTexts[0].textContent = t.about.text1;
+            if (aboutTexts[1]) aboutTexts[1].textContent = t.about.text2;
+            if (aboutTexts[2]) aboutTexts[2].textContent = t.about.text3;
+
+            const features = document.querySelectorAll('.about-features .feature');
+            features.forEach((feat, i) => {
+                const featureData = [t.about.feature1, t.about.feature2, t.about.feature3, t.about.feature4];
+                if (featureData[i]) {
+                    feat.querySelector('h4').textContent = featureData[i].title;
+                    feat.querySelector('p').textContent = featureData[i].desc;
+                }
+            });
+
+            // Products Section
+            const prodTitle = document.querySelector('#products .section-title');
+            const prodSubtitle = document.querySelector('#products .section-subtitle');
+            if (prodTitle) prodTitle.textContent = t.products.title;
+            if (prodSubtitle) prodSubtitle.textContent = t.products.subtitle;
+
+            document.querySelectorAll('.product-card').forEach((card, index) => {
+                if (t.products.items[index]) {
+                    card.querySelector('.product-name').textContent = t.products.items[index].name;
+                    card.querySelector('.product-desc').textContent = t.products.items[index].desc;
+                    card.querySelector('.product-price').textContent = t.products.items[index].price;
+                }
+                card.querySelector('.product-btn').textContent = t.products.btnCart;
+            });
+
+            // Testimonials Section
+            const testTitle = document.querySelector('#testimonials .section-title');
+            const testSubtitle = document.querySelector('#testimonials .section-subtitle');
+            if (testTitle) testTitle.textContent = t.testimonials.title;
+            if (testSubtitle) testSubtitle.textContent = t.testimonials.subtitle;
+
+            document.querySelectorAll('.testimonial-card').forEach((card, index) => {
+                if (t.testimonials.items[index]) {
+                    card.querySelector('.testimonial-text').textContent = t.testimonials.items[index].text;
+                    card.querySelector('.testimonial-author').textContent = t.testimonials.items[index].author;
+                    card.querySelector('.testimonial-role').textContent = t.testimonials.items[index].role;
+                }
+            });
+
+            // Contact Section
+            const contactTitle = document.querySelector('#contact .section-title');
+            const contactSubtitle = document.querySelector('#contact .section-subtitle');
+            if (contactTitle) contactTitle.textContent = t.contact.title;
+            if (contactSubtitle) contactSubtitle.textContent = t.contact.subtitle;
+
+            document.querySelectorAll('.contact-item').forEach((item, index) => {
+                const heading = item.querySelector('h4');
+                const text = item.querySelector('p');
+                
+                if (index === 0 && heading) {
+                    heading.innerHTML = t.contact.location.heading;
+                    text.innerHTML = t.contact.location.text.replace(/\n/g, '<br>');
+                }
+                if (index === 1 && heading) {
+                    heading.innerHTML = t.contact.phone.heading;
+                    text.innerHTML = t.contact.phone.text.replace(/\n/g, '<br>');
+                }
+                if (index === 2 && heading) {
+                    heading.innerHTML = t.contact.email.heading;
+                    text.innerHTML = t.contact.email.text.replace(/\n/g, '<br>');
+                }
+                if (index === 3 && heading) {
+                    heading.innerHTML = t.contact.social.heading;
+                }
+            });
+
+            // Form Labels
+            document.getElementById('name').placeholder = t.contact.form.placeholder_name;
+            document.getElementById('email').placeholder = t.contact.form.placeholder_email;
+            document.getElementById('message').placeholder = t.contact.form.placeholder_msg;
+
+            const labels = document.querySelectorAll('.contact-form label');
+            if (labels[0]) labels[0].textContent = t.contact.form.name;
+            if (labels[1]) labels[1].textContent = t.contact.form.email;
+            if (labels[2]) labels[2].textContent = t.contact.form.message;
+
+            document.querySelector('.form-btn').textContent = t.contact.form.submit;
+
+            // Footer
+            const footerLinks = document.querySelectorAll('.footer-links a');
+            if (footerLinks[0]) footerLinks[0].textContent = t.footer.privacy;
+            if (footerLinks[1]) footerLinks[1].textContent = t.footer.terms;
+
+            document.querySelector('.footer-bottom p').textContent = t.footer.copyright;
+        }
+
+        // Initialize with current language on page load
+        updatePageLanguage();
+        const navbar = document.getElementById('navbar');
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        // Hamburger Menu Toggle
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ============ Intersection Observer for Fade-in ============
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.animation = 'fadeInUp 0.6s ease-out';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            element.style.opacity = '0';
+            observer.observe(element);
+        });
+
+        // ============ Form Submission ============
+        const contactForm = document.querySelector('.contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Simple validation
+            if (name.trim() && email.trim() && message.trim()) {
+                // Show success message
+                alert(`Thank you ${name}! Your message has been sent. We'll get back to you soon!`);
+                
+                // Reset form
+                contactForm.reset();
+            } else {
+                alert('Please fill out all fields.');
+            }
+        });
+
+        // ============ Button Click Effects ============
+        document.querySelectorAll('.product-btn, .btn-primary, .btn-secondary, .form-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // ============ Smooth Scroll Enhancement ============
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
